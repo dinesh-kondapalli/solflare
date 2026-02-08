@@ -70,7 +70,7 @@ function FeatureCard({
 
 export default function SecondaryFeaturesSection() {
   return (
-    <section className="relative z-10 px-4 pb-28">
+    <section className="relative z-10 px-4 pb-6">
       <div className="rounded-[36px] bg-[#f2f4f8] px-6 py-16 sm:px-16 sm:py-24">
         <div className="grid gap-10 lg:grid-cols-[140px_1fr]">
           <div className="flex items-start">
