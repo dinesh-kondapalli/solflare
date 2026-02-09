@@ -22,13 +22,13 @@ export default function Showcase() {
             <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
               <button
                 type="button"
-                className="rounded-full border border-[#0a0c10] bg-[#0a0c10] px-7 py-3 text-sm font-semibold text-white shadow-[0_0_0_3px_rgba(10,12,16,0.08)]"
+                className="rounded-full border border-[#0a0c10] bg-[#0a0c10] px-7 py-3 text-sm font-semibold text-white shadow-[0_0_0_3px_rgba(10,12,16,0.08)] transition hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Get extension
               </button>
               <button
                 type="button"
-                className="rounded-full border border-[#0a0c10] px-7 py-3 text-sm font-semibold text-[#0a0c10]"
+                className="rounded-full border border-[#0a0c10] px-7 py-3 text-sm font-semibold text-[#0a0c10] transition hover:-translate-y-0.5 hover:bg-[#0a0c10] hover:text-white"
               >
                 Download now
               </button>

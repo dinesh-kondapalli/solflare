@@ -1,6 +1,8 @@
 import BigStatement from "@/components/sections/BigStatement";
+import BottomBarSection from "@/components/sections/BottomBarSection";
 import CardSpendSection from "@/components/sections/CardSpendSection";
 import ClaimStatement from "@/components/sections/ClaimStatement";
+import FooterSection from "@/components/sections/FooterSection";
 import Hero from "@/components/sections/Hero";
 import LiberateSection from "@/components/sections/LiberateSection";
 import PowerStatement from "@/components/sections/PowerStatement";
@@ -32,6 +34,8 @@ export default function Home() {
         <TestimonialsSection />
         <PreFooterSection />
       </main>
+      <FooterSection />
+      <BottomBarSection />
     </div>
   );
 }

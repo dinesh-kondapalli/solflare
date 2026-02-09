@@ -28,7 +28,7 @@ export default function CardSpendSection() {
           <div className="mt-auto flex flex-wrap items-center gap-4 pt-12">
             <button
               type="button"
-              className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white"
+              className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
             >
               Get Solflare Card now
             </button>

@@ -38,13 +38,13 @@ export default function LiberateSection() {
             <div className="mt-auto flex flex-wrap items-center gap-4 pt-12">
               <button
                 type="button"
-                className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white"
+                className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Master your trade
               </button>
               <button
                 type="button"
-                className="rounded-full border border-[#0a0c10] px-8 py-3 text-sm font-semibold text-[#0a0c10]"
+                className="rounded-full border border-[#0a0c10] px-8 py-3 text-sm font-semibold text-[#0a0c10] transition hover:-translate-y-0.5 hover:bg-[#0a0c10] hover:text-white"
               >
                 Stake your claim
               </button>
@@ -63,7 +63,7 @@ export default function LiberateSection() {
             <div className="mt-auto flex flex-wrap items-center gap-4 pt-12">
               <button
                 type="button"
-                className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white"
+                className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Enter Stronghold
               </button>
@@ -118,7 +118,7 @@ export default function LiberateSection() {
             <div className="mt-auto flex flex-wrap items-center gap-4 pt-12">
               <button
                 type="button"
-                className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white"
+                className="rounded-full bg-[#0a0c10] px-8 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:shadow-lg"
               >
                 Explore hardware
               </button>
