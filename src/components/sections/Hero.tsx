@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 export default function Hero() {
   return (
     <section className="relative z-10 bg-[#050608] px-10 pb-20 pt-16">
