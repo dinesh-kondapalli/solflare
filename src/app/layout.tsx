@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, Space_Mono } from "next/font/google";
+import localFont from "next/font/local";
+import { Space_Mono } from "next/font/google";
 import "./globals.css";
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
+const fkGrotesk = localFont({
+  src: "../../public/FKGroteskTrial-Regular.otf",
+  variable: "--font-fk-grotesk",
   display: "swap",
 });
 
@@ -18,6 +19,9 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Solflare - Spend with your Solflare Mastercard",
   description: "Clone of Solflare homepage hero and sections.",
+  icons: {
+    icon: "/App-Icon.svg",
+  },
 };
 
 export default function RootLayout({
@@ -27,9 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${spaceGrotesk.variable} ${spaceMono.variable} antialiased`}
-      >
+      <body className={`${fkGrotesk.variable} ${spaceMono.variable} antialiased`}>
         {children}
       </body>
     </html>
