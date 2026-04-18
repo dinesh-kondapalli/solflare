@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const footerLinks = {
   secondary: [
@@ -121,12 +122,12 @@ export default function FooterSection() {
             >
               Download now
             </a>
-            <a
-              href="https://solflare.com/onboard/"
+            <Link
+              href="/portfolio"
               className="rounded-full bg-white/10 px-8 py-4 text-base font-medium text-white transition hover:bg-white/20"
             >
               Access wallet
-            </a>
+            </Link>
           </div>
         </div>
 
