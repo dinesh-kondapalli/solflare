@@ -1,9 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
-
-const navItems = [
-  { label: "Portfolio", icon: "wallet", active: true },
-];
 
 function Svg({
   title,
@@ -217,17 +212,9 @@ function Icon({
   }
 }
 
-function SolflareWordmark() {
-  return (
-    <div className="text-[28px] font-semibold tracking-[-0.06em] text-white sm:text-[34px]">
-      Solflare
-    </div>
-  );
-}
-
 function WalletBadge() {
   return (
-    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-white/80">
+    <div className="flex h-11 w-11 items-center justify-center rounded-full bg-foreground/10 text-sm font-semibold text-foreground/80">
       MW
     </div>
   );
@@ -235,42 +222,9 @@ function WalletBadge() {
 
 function TokenPill({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-white/[0.06]">
+    <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full bg-foreground/5">
       <Image src={src} alt={alt} width={28} height={28} className="h-7 w-7" />
     </div>
-  );
-}
-
-function NavItem({
-  label,
-  icon,
-  active,
-  badge,
-}: {
-  label: string;
-  icon: string;
-  active?: boolean;
-  badge?: string;
-}) {
-  return (
-    <button
-      type="button"
-      className={`flex w-full items-center gap-3 rounded-2xl px-4 py-3 text-left transition ${
-        active
-          ? "border border-white/70 bg-white/[0.08] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.1)]"
-          : "border border-transparent text-white/45 hover:bg-white/[0.04] hover:text-white/80"
-      }`}
-    >
-      <span className={active ? "text-white" : "text-white/45"}>
-        <Icon name={icon} />
-      </span>
-      <span className="text-[15px] font-medium">{label}</span>
-      {badge ? (
-        <span className="ml-auto rounded-full bg-[#5b5505] px-2 py-0.5 text-[11px] font-semibold text-[#fff45d]">
-          {badge}
-        </span>
-      ) : null}
-    </button>
   );
 }
 
@@ -278,7 +232,7 @@ function ActionButton({ label, icon }: { label: string; icon: string }) {
   return (
     <button
       type="button"
-      className="flex flex-1 items-center justify-center gap-2 rounded-full bg-white/10 px-5 py-4 text-lg font-semibold text-white transition hover:bg-white/14"
+      className="flex flex-1 items-center justify-center gap-2 rounded-full bg-foreground px-5 py-4 text-lg font-semibold text-background transition hover:opacity-90"
     >
       <Icon name={icon} className="h-5 w-5" />
       <span>{label}</span>
@@ -288,66 +242,45 @@ function ActionButton({ label, icon }: { label: string; icon: string }) {
 
 export default function PortfolioPage() {
   return (
-    <main className="min-h-screen bg-[#02050b] text-white">
-      <div className="mx-auto flex min-h-screen max-w-[1920px] gap-4 p-3 lg:gap-6 lg:p-4">
-        <aside className="hidden w-[240px] shrink-0 rounded-[28px] bg-[#0c1016] p-4 lg:flex lg:flex-col">
-          <Link href="/" className="px-3 pt-3">
-            <SolflareWordmark />
-          </Link>
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="mx-auto min-h-screen max-w-[1380px] p-3 lg:p-4">
+        <section className="min-w-0">
+          <div className="flex items-center justify-between gap-4">
+            <h1 className="text-[28px] font-semibold tracking-tight">
+              Portfolio
+            </h1>
 
-          <nav className="mt-8 space-y-2">
-            {navItems.map((item) => (
-              <NavItem key={item.label} {...item} />
-            ))}
-          </nav>
-        </aside>
+            <div className="hidden items-center gap-3 lg:flex">
+              <button
+                type="button"
+                className="flex h-12 w-12 items-center justify-center rounded-full bg-foreground/6 text-foreground/90 transition hover:bg-foreground/10"
+              >
+                <Icon name="settings" className="h-5 w-5" />
+              </button>
 
-        <section className="min-w-0 flex-1 px-3 lg:px-7 xl:px-10">
-          <div className="flex max-w-[1380px] flex-col gap-5 lg:flex-row">
-            <div className="min-w-0 flex-1">
-              <div className="flex items-center justify-between gap-4">
-                <h1 className="text-[28px] font-semibold tracking-tight">
-                  Portfolio
-                </h1>
-
-                <div className="hidden items-center gap-3 lg:flex">
-                  <button
-                    type="button"
-                    className="flex h-12 w-12 items-center justify-center rounded-full bg-white/6 text-white/75 transition hover:bg-white/10"
-                  >
-                    <Icon name="settings" className="h-5 w-5" />
-                  </button>
-
-                  <button
-                    type="button"
-                    className="flex items-center gap-3 rounded-full bg-white/6 px-3 py-2 text-left transition hover:bg-white/10"
-                  >
-                    <WalletBadge />
-                    <div>
-                      <div className="text-[14px] font-semibold">
-                        Main Wallet
-                      </div>
-                      <div className="flex items-center gap-1 text-[13px] text-white/45">
-                        <span>FQhk...A4Qi</span>
-                        <span className="text-white/35">[]</span>
-                      </div>
-                    </div>
-                    <Icon name="chevron" className="h-4 w-4 text-white/35" />
-                  </button>
+              <button
+                type="button"
+                className="flex items-center gap-3 rounded-full bg-foreground/6 px-3 py-2 text-left transition hover:bg-foreground/10"
+              >
+                <WalletBadge />
+                <div>
+                  <div className="text-[14px] font-semibold">Main Wallet</div>
+                  <div className="flex items-center gap-1 text-[13px] text-foreground/75">
+                    <span>FQhk...A4Qi</span>
+                    <span className="text-foreground/55">[]</span>
+                  </div>
                 </div>
-              </div>
+                <Icon name="chevron" className="h-4 w-4 text-foreground/50" />
+              </button>
+            </div>
+          </div>
 
-              <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_390px]">
-                <div className="space-y-4">
-                  <section className="overflow-hidden rounded-[28px] bg-[#171b22] shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-                    <div className="relative px-8 py-8 sm:px-8 sm:py-8">
-                      <div className="absolute inset-0 bg-[url('/fortune-flow-web.351b1bb9.png')] bg-cover bg-center bg-no-repeat" />
-                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,20,26,0.22),rgba(17,20,26,0.34))]" />
-
-                      <div className="relative">
-                        <div className="text-sm font-semibold uppercase tracking-[0.16em] text-white/60">
+          <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,1fr)_390px]">
+            <div className="space-y-4">
+              <section className="overflow-hidden rounded-[28px] bg-panel-2 px-8 py-8 shadow-[inset_0_1px_0_rgba(23,86,65,0.06)] sm:px-8 sm:py-8">
+                        <div className="text-sm font-semibold uppercase tracking-[0.16em] text-foreground/70">
                           <span>BALANCE</span>
-                          <span className="ml-2 inline-flex align-middle text-white/45">
+                          <span className="ml-2 inline-flex align-middle text-foreground/55">
                             <Icon name="info" className="h-4 w-4" />
                           </span>
                         </div>
@@ -356,12 +289,12 @@ export default function PortfolioPage() {
                           <div className="text-5xl font-semibold tracking-tight">
                             $0.00
                           </div>
-                          <div className="mb-1 text-white/45">
+                          <div className="mb-1 text-foreground/55">
                             <Icon name="eye-off" className="h-6 w-6" />
                           </div>
                         </div>
 
-                        <div className="mt-1 flex items-center gap-2 text-lg text-white/60">
+                        <div className="mt-1 flex items-center gap-2 text-lg text-foreground/70">
                           <span>+$0.00</span>
                           <span>·</span>
                           <span>+0.00%</span>
@@ -372,11 +305,9 @@ export default function PortfolioPage() {
                           <ActionButton label="Stake" icon="piggy" />
                           <ActionButton label="Send" icon="send" />
                         </div>
-                      </div>
-                    </div>
                   </section>
 
-                  <section className="rounded-[28px] bg-[#11151b] px-6 py-10 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] sm:px-10 sm:py-16">
+              <section className="rounded-[28px] bg-panel px-6 py-10 shadow-[inset_0_1px_0_rgba(23,86,65,0.05)] sm:px-10 sm:py-16">
                     <div className="flex min-h-[420px] flex-col items-center justify-center text-center">
                       <Image
                         src="/portfolio-empty.74e559d5.png"
@@ -389,119 +320,109 @@ export default function PortfolioPage() {
                       <h2 className="mt-4 text-[24px] font-semibold sm:text-[36px]">
                         Get started with SOL
                       </h2>
-                      <p className="mt-4 max-w-[560px] text-xl leading-9 text-white/38">
+                      <p className="mt-4 max-w-[560px] text-xl leading-9 text-foreground/72">
                         Buy SOL to start trading, staking, and exploring.
                         You&apos;ll need a tiny amount of SOL for each Solana
                         transaction.
                       </p>
                       <button
                         type="button"
-                        className="mt-8 rounded-full bg-[#ffe24a] px-6 py-3 text-lg font-semibold text-black transition hover:bg-[#f7d929]"
+                        className="mt-8 rounded-full bg-cta px-6 py-3 text-lg font-semibold text-cta-foreground transition hover:opacity-90"
                       >
                         Deposit
                       </button>
                     </div>
                   </section>
-                </div>
+            </div>
 
-                <aside className="rounded-[28px] bg-[#11151b] p-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.02)] xl:sticky xl:top-4 xl:h-fit">
-                  <div className="flex items-center justify-between">
-                    <h2 className="text-[22px] font-semibold">Swap</h2>
+            <aside className="rounded-[28px] bg-panel px-6 py-6 shadow-[inset_0_1px_0_rgba(23,86,65,0.05)] xl:sticky xl:top-4 xl:h-fit">
+              <div className="flex items-center justify-between">
+                <h2 className="text-[22px] font-semibold text-foreground">Swap</h2>
+                <button
+                  type="button"
+                  className="text-foreground/70 hover:text-foreground"
+                >
+                  <Icon name="tune" className="h-5 w-5" />
+                </button>
+              </div>
+
+              <div className="mt-8 space-y-8">
+                <div>
+                  <div className="mb-3 flex items-center justify-between text-sm text-foreground/65">
+                    <span>Sell</span>
+                    <div className="flex gap-2 text-xs text-foreground/45">
+                      <span>25%</span>
+                      <span>50%</span>
+                      <span>75%</span>
+                      <span>Max</span>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-4 rounded-xl bg-foreground/5 px-4 py-3">
                     <button
                       type="button"
-                      className="text-white/75 hover:text-white"
+                      className="flex items-center gap-3 rounded-xl bg-foreground/5 px-3 py-2"
                     >
-                      <Icon name="tune" className="h-5 w-5" />
+                      <TokenPill src="/sol.png" alt="Solana" />
+                      <span className="text-[17px] font-semibold">SOL</span>
+                      <Icon
+                        name="chevron"
+                        className="h-4 w-4 rotate-90 text-foreground/35"
+                      />
                     </button>
+                    <span className="text-[20px] font-semibold text-foreground/75">
+                      0
+                    </span>
                   </div>
 
-                  <div className="mt-8 space-y-8">
-                    <div>
-                      <div className="mb-3 flex items-center justify-between text-sm text-white/45">
-                        <span>Sell</span>
-                        <div className="flex gap-2 text-xs text-white/20">
-                          <span>25%</span>
-                          <span>50%</span>
-                          <span>75%</span>
-                          <span>Max</span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-4 rounded-xl bg-white/[0.06] px-4 py-3">
-                        <button
-                          type="button"
-                          className="flex items-center gap-3 rounded-xl bg-white/[0.05] px-3 py-2"
-                        >
-                          <TokenPill
-                            src="/sol.png"
-                            alt="Solana"
-                          />
-                          <span className="text-[17px] font-semibold">SOL</span>
-                          <Icon
-                            name="chevron"
-                            className="h-4 w-4 rotate-90 text-white/45"
-                          />
-                        </button>
-                        <span className="text-[20px] font-semibold text-white/55">
-                          0
-                        </span>
-                      </div>
-
-                      <div className="mt-2 text-sm text-white/45">
-                        Balance: 0
-                      </div>
-                    </div>
-
-                    <div className="relative flex justify-center border-t border-white/8">
-                      <button
-                        type="button"
-                        className="absolute -top-5 flex h-10 w-10 items-center justify-center rounded-full bg-[#252932] text-white/70"
-                      >
-                        <Icon name="switch" className="h-4 w-4" />
-                      </button>
-                    </div>
-
-                    <div>
-                      <div className="mb-3 text-sm text-white/45">Buy</div>
-
-                      <div className="flex items-center justify-between gap-4 rounded-xl bg-white/[0.06] px-4 py-3">
-                        <button
-                          type="button"
-                          className="flex items-center gap-3 rounded-xl bg-white/[0.05] px-3 py-2"
-                        >
-                          <TokenPill
-                            src="/usdc.png"
-                            alt="USD Coin"
-                          />
-                          <span className="text-[17px] font-semibold">
-                            USDC
-                          </span>
-                          <Icon
-                            name="chevron"
-                            className="h-4 w-4 rotate-90 text-white/45"
-                          />
-                        </button>
-                        <span className="text-[20px] font-semibold text-white/55">
-                          0
-                        </span>
-                      </div>
-
-                      <div className="mt-2 text-sm text-white/45">
-                        Balance: 0
-                      </div>
-                    </div>
+                  <div className="mt-2 text-sm text-foreground/60">
+                    Balance: 0
                   </div>
+                </div>
 
+                <div className="relative flex justify-center border-t border-foreground/10">
                   <button
                     type="button"
-                    disabled
-                    className="mt-32 w-full rounded-full bg-white/10 px-6 py-4 text-lg font-semibold text-white/25"
+                    className="absolute -top-5 flex h-10 w-10 items-center justify-center rounded-full bg-foreground/8 text-foreground/60"
                   >
-                    Enter amount
+                    <Icon name="switch" className="h-4 w-4" />
                   </button>
-                </aside>
+                </div>
+
+                <div>
+                <div className="mb-3 text-sm text-foreground/65">Buy</div>
+
+                  <div className="flex items-center justify-between gap-4 rounded-xl bg-foreground/5 px-4 py-3">
+                    <button
+                      type="button"
+                      className="flex items-center gap-3 rounded-xl bg-foreground/5 px-3 py-2"
+                    >
+                      <TokenPill src="/usdc.png" alt="USD Coin" />
+                      <span className="text-[17px] font-semibold">USDC</span>
+                      <Icon
+                        name="chevron"
+                        className="h-4 w-4 rotate-90 text-foreground/35"
+                      />
+                    </button>
+                    <span className="text-[20px] font-semibold text-foreground/75">
+                      0
+                    </span>
+                  </div>
+
+                  <div className="mt-2 text-sm text-foreground/60">
+                    Balance: 0
+                  </div>
+                </div>
               </div>
-            </div>
+
+              <button
+                type="button"
+                disabled
+                className="mt-32 w-full rounded-full bg-foreground/8 px-6 py-4 text-lg font-semibold text-foreground/55"
+              >
+                Enter amount
+              </button>
+            </aside>
           </div>
         </section>
       </div>

@@ -1,5 +1,8 @@
-import BigStatement from "@/components/sections/BigStatement";
 import BottomBarSection from "@/components/sections/BottomBarSection";
+import Link from "next/link";
+
+/*
+import BigStatement from "@/components/sections/BigStatement";
 import CardSpendSection from "@/components/sections/CardSpendSection";
 import ClaimStatement from "@/components/sections/ClaimStatement";
 import FooterSection from "@/components/sections/FooterSection";
@@ -14,28 +17,20 @@ import StatsBar from "@/components/sections/StatsBar";
 import SupportSection from "@/components/sections/SupportSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import TopNav from "@/components/sections/TopNav";
+*/
 
 export default function Home() {
   return (
     <div className="page-shell">
-      <TopNav />
-      <main>
-        <Hero />
-        <Showcase />
-        <StatsBar />
-        <BigStatement />
-        <ShieldSection />
-        <PowerStatement />
-        <LiberateSection />
-        <ClaimStatement />
-        <CardSpendSection />
-        <SecondaryFeaturesSection />
-        <SupportSection />
-        <TestimonialsSection />
-        <PreFooterSection />
-      </main>
-      <FooterSection />
       <BottomBarSection />
+      <div className="absolute right-4 bottom-6 z-20 sm:right-6 sm:bottom-8">
+        <Link
+          href="/portfolio"
+          className="rounded-full bg-cta px-5 py-3 text-sm font-semibold text-cta-foreground transition hover:opacity-90"
+        >
+          Go to wallet
+        </Link>
+      </div>
     </div>
   );
 }

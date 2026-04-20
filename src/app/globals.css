@@ -1,19 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #07090c;
-  --bg-elevated: #0d1016;
-  --text-primary: #f4f6fb;
-  --text-muted: #c8cdd7;
-  --accent: #ffef46;
-  --accent-strong: #fbe400;
-  --card-border: rgba(255, 255, 255, 0.1);
-  --card-glow: rgba(255, 239, 70, 0.25);
+  --background: #b4dc19;
+  --foreground: #0f4d39;
+  --muted: color-mix(in srgb, var(--foreground) 82%, var(--background));
+  --muted-foreground: color-mix(in srgb, var(--foreground) 68%, var(--background));
+  --subtle: color-mix(in srgb, var(--background) 74%, white);
+  --line: color-mix(in srgb, var(--foreground) 30%, var(--background));
+  --line-2: color-mix(in srgb, var(--foreground) 44%, var(--background));
+  --panel: color-mix(in srgb, var(--background) 92%, white);
+  --panel-2: color-mix(in srgb, var(--background) 84%, white);
+  --panel-3: color-mix(in srgb, var(--background) 74%, white);
+  --surface-inset: color-mix(in srgb, var(--foreground) 14%, var(--background));
+  --cta: var(--foreground);
+  --cta-foreground: var(--background);
+  --shadow: rgba(15, 77, 57, 0.22);
+
+  --bg: var(--background);
+  --bg-elevated: var(--panel);
+  --text-primary: var(--foreground);
+  --text-muted: var(--muted-foreground);
+  --accent: var(--foreground);
+  --accent-strong: color-mix(in srgb, var(--foreground) 88%, black);
+  --card-border: color-mix(in srgb, var(--foreground) 18%, var(--background));
+  --card-glow: rgba(15, 77, 57, 0.18);
 }
 
 @theme inline {
   --font-sans: var(--font-fk-grotesk);
   --font-mono: var(--font-space-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-panel-3: var(--panel-3);
+  --color-surface-inset: var(--surface-inset);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
 }
 
 * {
@@ -21,14 +50,14 @@
 }
 
 html {
-  background: var(--bg);
-  color-scheme: dark;
+  background: var(--background);
+  color-scheme: light;
 }
 
 body {
   min-height: 100vh;
-  background: #050608;
-  color: var(--text-primary);
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-fk-grotesk), system-ui, sans-serif;
 }
 
@@ -52,14 +81,14 @@ img {
 }
 
 .section-card {
-  background: #f6f7fb;
-  color: #11131a;
-  box-shadow: 0 40px 120px rgba(5, 6, 10, 0.55);
+  background: var(--panel);
+  color: var(--foreground);
+  box-shadow: 0 40px 120px var(--shadow);
 }
 
 .glass-panel {
-  background: rgba(14, 18, 26, 0.7);
+  background: color-mix(in srgb, var(--background) 74%, white);
   border: 1px solid var(--card-border);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 60px var(--shadow);
   backdrop-filter: blur(12px);
 }
