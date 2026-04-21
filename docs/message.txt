@@ -1,0 +1,124 @@
+ BWICK Chain Endpoints                                                                                                                                                                                                                                                     
+                                                                                                                                                                                                                                                                            
+  RPC:          http://174.138.87.223:26657                                                                                                                                                                                                                                 
+  REST/LCD:     http://174.138.87.223:1317                                                                                                                                                                                                                                  
+  Relayer API:  http://174.138.87.223:3080                                                                                                                                                                                                                                  
+  
+  Chain Config                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                          
+  Chain ID:        bwick-1
+  Denom:           ubwick                                                                                                                                                                                                                                                   
+  Coin Decimals:   6
+  Symbol:          BWICK                                                                                                                                                                                                                                                    
+  Bech32 Prefix:   bwick                                                                                                                                                                                                                                                    
+  BIP44 Coin Type: 118
+  HD Path:         m/44'/118'/0'/0/0                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                          
+  Bech32 Prefixes                                                                                                                                                                                                                                                           
+  
+  Account:           bwick                                                                                                                                                                                                                                                  
+  Account Pub:       bwickpub                                                                                                                                                                                                                                             
+  Validator:         bwickvaloper
+  Validator Pub:     bwickvaloperpub                                                                                                                                                                                                                                        
+  Consensus:         bwickvalcons
+  Consensus Pub:     bwickvalconspub                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                          
+  Bridge (Solana side)                                                                                                                                                                                                                                                      
+  
+  Bridge Program:    5JCGZsiucAUkAK2sh1bbiz1EsorWs1cBdUat7yjQRNW8                                                                                                                                                                                                           
+  Test Mint:         6urDAWfh1MpZzy1MCPxKmRsECagAiAuuPAXqb6Hcpump  (Token-2022)                                                                                                                                                                                             
+  Final Mint:        D367UTH5iaRdvR8MXLKuYdCa73yQt3Jx9xPiYPUypump  (not yet created)                                                                                                                                                                                        
+  Solana RPC:        https://api.mainnet-beta.solana.com                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                            
+  Key Addresses                                                                                                                                                                                                                                                             
+                                                                                                                                                                                                                                                                          
+  Deployer:          bwick1595rh758em5ghte603txwykqnneyh0wptdqqut                                                                                                                                                                                                           
+  Relayer:           bwick1e3wutmtlah0emmefggnqgxn2zqqx5qpl0r4xzu                                                                                                                                                                                                           
+  Solana Relayer:    F8dT2AXfwmZfyVaKUNhQ26bkX9Q8SvZmhGiv3nRhvYTx
+                                                                                                                                                                                                                                                                            
+  Wallet Generation                                                                                                                                                                                                                                                       
+                                                                                                                                                                                                                                                                            
+  The wallet keygen API is at src/lib/wallet-keygen.ts. Dependencies needed:                                                                                                                                                                                                
+  
+  npm install @cosmjs/crypto @cosmjs/encoding bech32                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                          
+  Usage:                                                                                                                                                                                                                                                                    
+  
+  import { generateWallet, restoreWallet } from "@/lib/wallet-keygen";                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                          
+  // Generate new wallet                                                                                                                                                                                                                                                    
+  const wallet = await generateWallet();
+  wallet.address;   // "bwick1..."                                                                                                                                                                                                                                          
+  wallet.mnemonic;  // 24 words                                                                                                                                                                                                                                           
+  wallet.pubkey;    // Uint8Array (33 bytes, compressed secp256k1)                                                                                                                                                                                                          
+  wallet.privkey;   // Uint8Array (32 bytes)                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                            
+  // Restore from mnemonic                                                                                                                                                                                                                                                  
+  const wallet = await restoreWallet("bike elite net siren ...");                                                                                                                                                                                                         
+                                                                                                                                                                                                                                                                            
+  How it works: Standard Cosmos key derivation — BIP39 mnemonic -> SLIP10 seed -> secp256k1 keypair at m/44'/118'/0'/0/0 -> ripemd160(sha256(compressedPubkey)) -> bech32 encode with bwick prefix.                                                                         
+                                                                                                                                                                                                                                                                            
+  Contracts                                                                                                                                                                                                                                                                 
+                                                                                                                                                                                                                                                                          
+  AMM:        bwick1wug8sewp6cedgkmrmvhl3lf3tulagm9hnvy8p0rppz9yjw0g4wtql49ren                                                                                                                                                                                              
+  Launchpad:  bwick1qg5ega6dykkxc307y25pecuufrjkxkaggkkxh7nad0vhyhtuhw3sg09vt0                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                            
+  Validators                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                            
+  ┌───────┬────────────────┬─────────┐                                                                                                                                                                                                                                      
+  │ Node  │       IP       │ Moniker │
+  ├───────┼────────────────┼─────────┤                                                                                                                                                                                                                                      
+  │ VPS-1 │ 174.138.87.223 │ val1    │                      
+  ├───────┼────────────────┼─────────┤
+  │ VPS-2 │ 142.93.191.187 │ val2    │                                                                                                                                                                                                                                      
+  ├───────┼────────────────┼─────────┤
+  │ VPS-3 │ 159.203.102.24 │ val3    │                                                                                                                                                                                                                                      
+  └───────┴────────────────┴─────────┘        
+  
+  ---
+  Key derivation (standard Cosmos):
+  HD Path:       m/44'/118'/0'/0/0
+  Curve:         secp256k1
+  Address:       ripemd160(sha256(compressedPubkey)) → bech32("bwick", ...)
+
+  Signing transactions:
+  BWICK Chain uses standard Cosmos SDK transaction signing — SIGN_MODE_DIRECT (protobuf). Any wallet that supports experimentalSuggestChain (Keplr/Leap standard) works out of the box with this chain config:
+
+  {
+    "chainId": "bwick-1",
+    "chainName": "BWICK Chain",
+    "rpc": "http://174.138.87.223:26657",
+    "rest": "http://174.138.87.223:1317",
+    "bip44": { "coinType": 118 },
+    "bech32Config": {
+      "bech32PrefixAccAddr": "bwick",
+      "bech32PrefixAccPub": "bwickpub",
+      "bech32PrefixValAddr": "bwickvaloper",
+      "bech32PrefixValPub": "bwickvaloperpub",
+      "bech32PrefixConsAddr": "bwickvalcons",
+      "bech32PrefixConsPub": "bwickvalconspub"
+    },
+    "currencies": [{ "coinDenom": "BWICK", "coinMinimalDenom": "ubwick", "coinDecimals": 6 }],
+    "feeCurrencies": [{ "coinDenom": "BWICK", "coinMinimalDenom": "ubwick", "coinDecimals": 6, "gasPriceStep": { "low": 0.01, "average": 0.025, "high": 0.04 } }],
+    "stakeCurrency": { "coinDenom": "BWICK", "coinMinimalDenom": "ubwick", "coinDecimals": 6 }
+  }
+
+  Wallet generation API — already in the codebase at src/lib/wallet-keygen.ts:
+  npm install @cosmjs/crypto @cosmjs/encoding bech32
+  import { generateWallet, restoreWallet } from "@/lib/wallet-keygen";
+
+  const wallet = await generateWallet();
+  // wallet.address  → "bwick1..."
+  // wallet.mnemonic → "bike elite net ..."
+  // wallet.privkey  → Uint8Array (32 bytes) ← this is what he needs for signing
+  // wallet.pubkey   → Uint8Array (33 bytes, compressed secp256k1)
+
+  // To sign transactions with @cosmjs:
+  import { DirectSecp256k1Wallet } from "@cosmjs/proto-signing";
+  import { SigningStargateClient } from "@cosmjs/stargate";
+
+  const signer = await DirectSecp256k1Wallet.fromKey(wallet.privkey, "bwick");
+  const client = await SigningStargateClient.connectWithSigner("http://174.138.87.223:26657", signer);
+  // client.sendTokens(), client.signAndBroadcast(), etc.
+
+  ---  

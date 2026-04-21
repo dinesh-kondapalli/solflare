@@ -1,3 +1,4 @@
+import { CaretDown } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 
 const navItems = [
@@ -6,21 +7,6 @@ const navItems = [
   { label: "Resources", hasDropdown: true },
   { label: "Explore Solana", hasDropdown: true },
 ];
-
-const ArrowDown = () => (
-  <svg
-    className="h-3.5 w-3.5"
-    viewBox="0 0 14 14"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <path
-      d="M7 14L0 7L1.63333 5.36667L5.83333 9.56667V0H8.16667V9.56667L12.3667 5.36667L14 7L7 14Z"
-      fill="currentColor"
-    />
-  </svg>
-);
 
 export default function TopNav() {
   return (
@@ -44,7 +30,9 @@ export default function TopNav() {
               {navItems.map((item) => (
                 <li key={item.label} className="flex items-center gap-1">
                   <span>{item.label}</span>
-                  {item.hasDropdown ? <ArrowDown /> : null}
+                  {item.hasDropdown ? (
+                    <CaretDown weight="fill" className="h-3.5 w-3.5" />
+                  ) : null}
                 </li>
               ))}
             </ul>

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Space_Mono } from "next/font/google";
+import { WalletProvider } from "@/providers/WalletProvider";
 import "./globals.css";
 
 const fkGrotesk = localFont({
@@ -9,16 +9,9 @@ const fkGrotesk = localFont({
   display: "swap",
 });
 
-const spaceMono = Space_Mono({
-  variable: "--font-space-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "Solflare - Spend with your Solflare Mastercard",
-  description: "Clone of Solflare homepage hero and sections.",
+  title: "BWICK Wallet",
+  description: "Non-custodial BWICK chain wallet.",
   icons: {
     icon: "/App-Icon.svg",
   },
@@ -31,8 +24,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${fkGrotesk.variable} ${spaceMono.variable} antialiased`}>
-        {children}
+      <body
+        className={`${fkGrotesk.variable} antialiased`}
+        style={{
+          ["--font-space-mono" as string]:
+            '"SFMono-Regular", "Liberation Mono", Consolas, monospace',
+        }}
+      >
+        <WalletProvider>{children}</WalletProvider>
       </body>
     </html>
   );
