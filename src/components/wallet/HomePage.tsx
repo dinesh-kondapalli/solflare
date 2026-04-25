@@ -10,6 +10,7 @@ import { useWallet } from "@/providers/WalletProvider";
 export default function HomePage() {
   const router = useRouter();
   const { status, createWallet, importWallet, unlock } = useWallet();
+  const isCheckingWallet = status === "loading";
   const [mode, setMode] = useState<"create" | "import" | "unlock">("create");
   const [label, setLabel] = useState("Main Wallet");
   const [password, setPassword] = useState("");
@@ -163,6 +164,21 @@ export default function HomePage() {
                     {copyMessage}
                   </p>
                 ) : null}
+              </div>
+            ) : isCheckingWallet ? (
+              <div>
+                <div className="w-full rounded-full border border-[#d7f06b]/25 bg-[#d7f06b]/10 px-4 py-3 text-center text-sm font-semibold text-[#d7f06b]">
+                  Checking wallet
+                </div>
+                <div className="mt-5 space-y-3">
+                  <h1 className="mt-3 text-2xl font-bold tracking-tight">
+                    Loading wallet state
+                  </h1>
+                  <p className="text-base leading-7 text-[#d7f06b]/72">
+                    Looking for an existing wallet before showing the correct
+                    action.
+                  </p>
+                </div>
               </div>
             ) : (
               <>
