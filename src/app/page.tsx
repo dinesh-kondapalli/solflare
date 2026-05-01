@@ -1,5 +1,5 @@
-import HomePage from "@/components/wallet/HomePage";
+import EntryGate from "@/components/wallet/EntryGate";
 
 export default function Home() {
-  return <HomePage />;
+  return <EntryGate />;
 }

@@ -51,6 +51,8 @@ type WalletContextValue = {
   status: WalletStatus;
   address: string | null;
   label: string;
+  requiresBackup: boolean;
+  recoveryPhrase: string | null;
   account: WalletAccountState | null;
   balance: WalletBalanceState;
   lastTxHash: string | null;
@@ -67,6 +69,7 @@ type WalletContextValue = {
   unlock: (password: string) => Promise<void>;
   lock: () => void;
   removeWallet: () => void;
+  confirmBackup: () => void;
   refresh: () => Promise<void>;
   send: (input: {
     recipient: string;
@@ -151,11 +154,13 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       label,
       mnemonic: walletMnemonic,
       password,
+      backupConfirmed,
     }: {
       address: string;
       label?: string;
       mnemonic: string;
       password: string;
+      backupConfirmed: boolean;
     }) => {
       const now = new Date().toISOString();
       const nextWallet: StoredWallet = {
@@ -163,6 +168,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         chainId: BWICK_CHAIN_ID,
         address,
         label: label?.trim() || "Main Wallet",
+        backupConfirmed,
         encryptedMnemonic: await encryptString(walletMnemonic, password),
         createdAt: now,
         updatedAt: now,
@@ -187,6 +193,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         label,
         mnemonic: generated.mnemonic,
         password,
+        backupConfirmed: false,
       });
 
       return generated.mnemonic;
@@ -203,6 +210,7 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
         label,
         mnemonic: restored.mnemonic,
         password,
+        backupConfirmed: true,
       });
     },
     [persistWallet],
@@ -255,6 +263,22 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
     setBalance(defaultBalance);
     setLastTxHash(null);
     setStatus("empty");
+  }, []);
+
+  const confirmBackupAction = useCallback(() => {
+    setStoredWallet((current) => {
+      if (!current) {
+        return current;
+      }
+
+      const nextWallet = {
+        ...current,
+        backupConfirmed: true,
+        updatedAt: new Date().toISOString(),
+      };
+      saveStoredWallet(nextWallet);
+      return nextWallet;
+    });
   }, []);
 
   const refreshAction = useCallback(async () => {
@@ -334,6 +358,8 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       status,
       address: storedWallet?.address ?? null,
       label: storedWallet?.label ?? "Main Wallet",
+      requiresBackup: Boolean(storedWallet && !storedWallet.backupConfirmed),
+      recoveryPhrase: mnemonic,
       account,
       balance,
       lastTxHash,
@@ -343,23 +369,25 @@ export function WalletProvider({ children }: { children: React.ReactNode }) {
       unlock: unlockAction,
       lock: lockAction,
       removeWallet: removeWalletAction,
+      confirmBackup: confirmBackupAction,
       refresh: refreshAction,
       send: sendAction,
     }),
     [
       account,
       balance,
+      confirmBackupAction,
       createWalletAction,
       importWalletAction,
       isRefreshing,
       lastTxHash,
       lockAction,
+      mnemonic,
       refreshAction,
       removeWalletAction,
       sendAction,
       status,
-      storedWallet?.address,
-      storedWallet?.label,
+      storedWallet,
       unlockAction,
     ],
   );

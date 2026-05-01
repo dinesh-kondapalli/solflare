@@ -10,6 +10,7 @@ export type StoredWallet = {
   chainId: string;
   address: string;
   label: string;
+  backupConfirmed: boolean;
   encryptedMnemonic: EncryptedData;
   createdAt: string;
   updatedAt: string;

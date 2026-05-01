@@ -1,9 +1,18 @@
 "use client";
 
-import { ArrowsClockwise, Copy, PaperPlaneTilt } from "@phosphor-icons/react";
+import {
+  ArrowsClockwise,
+  Copy,
+  GearSix,
+  Lock,
+  PaperPlaneTilt,
+  SignOut,
+  WarningCircle,
+} from "@phosphor-icons/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState, useTransition } from "react";
+import Modal from "@/components/wallet/Modal";
 import {
   BWICK_SYMBOL,
   formatBwickBalanceLabel,
@@ -73,8 +82,11 @@ export default function PortfolioPageClient() {
     label,
     account,
     balance,
+    requiresBackup,
     isRefreshing,
     lastTxHash,
+    lock,
+    removeWallet,
     refresh,
     send,
   } = useWallet();
@@ -84,18 +96,31 @@ export default function PortfolioPageClient() {
   const [sendError, setSendError] = useState<string | null>(null);
   const [copyStatus, setCopyStatus] = useState<string | null>(null);
   const [showSendForm, setShowSendForm] = useState(false);
+  const [showSettings, setShowSettings] = useState(false);
+  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [hasAcknowledgedLogout, setHasAcknowledgedLogout] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
-    if (status === "empty" || status === "locked") {
-      router.replace("/");
+    if (status === "empty") {
+      router.replace("/onboard");
+      return;
+    }
+
+    if (status === "locked") {
+      router.replace("/unlock");
+      return;
+    }
+
+    if (status === "unlocked" && requiresBackup) {
+      router.replace("/onboard/recovery");
       return;
     }
 
     if (status === "unlocked") {
       void refresh();
     }
-  }, [refresh, router, status]);
+  }, [refresh, requiresBackup, router, status]);
 
   const copyAddress = async () => {
     if (!address) {
@@ -144,6 +169,11 @@ export default function PortfolioPageClient() {
     return parts.map((part) => part[0]?.toUpperCase() ?? "").join("");
   }, [label]);
 
+  const logoutAndClearWallet = () => {
+    removeWallet();
+    router.replace("/onboard");
+  };
+
   if (status === "loading") {
     return (
       <main className="min-h-screen bg-background p-3 text-foreground">
@@ -166,6 +196,7 @@ export default function PortfolioPageClient() {
             <div className="hidden items-center gap-3 lg:flex">
               <button
                 type="button"
+                onClick={() => setShowSettings(true)}
                 className="flex items-center gap-3 rounded-full bg-foreground/6 px-5 py-3 text-left transition hover:bg-foreground/10"
               >
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-foreground/7 text-sm font-semibold uppercase tracking-[0.08em] text-foreground">
@@ -323,6 +354,87 @@ export default function PortfolioPageClient() {
           </div>
         </section>
       </div>
+
+      <Modal
+        title="Wallet Settings"
+        open={showSettings}
+        onClose={() => setShowSettings(false)}
+      >
+        <div className="space-y-3">
+          <button
+            type="button"
+            onClick={() => {
+              setShowSettings(false);
+              lock();
+              router.replace("/unlock");
+            }}
+            className="flex w-full items-center gap-3 rounded-[18px] border border-white/8 bg-white/6 px-4 py-4 text-left text-white transition hover:bg-white/10"
+          >
+            <Lock className="h-5 w-5" weight="fill" />
+            <span className="text-base font-semibold">Lock wallet</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              setShowSettings(false);
+              setShowLogoutConfirm(true);
+            }}
+            className="flex w-full items-center gap-3 rounded-[18px] border border-[#ff5555]/18 bg-[#3c1718] px-4 py-4 text-left text-[#ff8484] transition hover:brightness-[1.04]"
+          >
+            <SignOut className="h-5 w-5" weight="fill" />
+            <span className="text-base font-semibold">
+              Log out and clear local wallet
+            </span>
+          </button>
+        </div>
+      </Modal>
+
+      <Modal
+        title="Log out"
+        open={showLogoutConfirm}
+        onClose={() => setShowLogoutConfirm(false)}
+      >
+        <div className="rounded-[18px] border border-[#ff5555]/18 bg-[#3c1718] px-4 py-3 text-[#ff7272]">
+          <div className="flex items-start gap-3 text-sm leading-6">
+            <WarningCircle className="mt-0.5 h-5 w-5 shrink-0" weight="fill" />
+            <span>
+              This removes your wallet from this browser. You will need your
+              recovery phrase to restore it.
+            </span>
+          </div>
+        </div>
+
+        <label className="mt-5 flex items-start gap-3 text-base leading-7 text-white/88">
+          <input
+            type="checkbox"
+            checked={hasAcknowledgedLogout}
+            onChange={(event) => setHasAcknowledgedLogout(event.target.checked)}
+            className="mt-1 h-5 w-5 rounded border-white/20 bg-transparent accent-[#ffea4f]"
+          />
+          <span>
+            I backed up my recovery phrase and understand I cannot restore this
+            wallet without it.
+          </span>
+        </label>
+
+        <div className="mt-7 grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setShowLogoutConfirm(false)}
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-white/8 px-5 py-3 text-lg font-semibold text-white transition hover:bg-white/12"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            disabled={!hasAcknowledgedLogout}
+            onClick={logoutAndClearWallet}
+            className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#d33d31] px-5 py-3 text-lg font-semibold text-white transition hover:brightness-[1.02] disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Log out
+          </button>
+        </div>
+      </Modal>
     </main>
   );
 }
