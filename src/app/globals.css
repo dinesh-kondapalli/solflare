@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0f4d39;
+  --foreground: #d7f06b;
+  --muted: color-mix(in srgb, var(--foreground) 82%, var(--background));
+  --muted-foreground: color-mix(
+    in srgb,
+    var(--foreground) 68%,
+    var(--background)
+  );
+  --subtle: color-mix(in srgb, var(--background) 74%, white);
+  --line: color-mix(in srgb, var(--foreground) 30%, var(--background));
+  --line-2: color-mix(in srgb, var(--foreground) 44%, var(--background));
+  --panel: #b4dc19;
+  --panel-2: #c6ea3e;
+  --panel-3: #d7f06b;
+  --surface-inset: color-mix(in srgb, var(--foreground) 14%, var(--background));
+  --cta: #0f4d39;
+  --cta-foreground: #d7f06b;
+  --shadow: rgba(5, 31, 22, 0.28);
+
+  --bg: var(--background);
+  --bg-elevated: var(--panel);
+  --text-primary: var(--foreground);
+  --text-muted: var(--muted-foreground);
+  --accent: var(--foreground);
+  --accent-strong: color-mix(in srgb, var(--foreground) 88%, black);
+  --card-border: color-mix(in srgb, var(--foreground) 18%, var(--background));
+  --card-glow: rgba(15, 77, 57, 0.18);
+}
+
+@theme inline {
+  --font-sans: var(--font-fk-grotesk);
+  --font-mono: var(--font-space-mono);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle: var(--subtle);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-panel-3: var(--panel-3);
+  --color-surface-inset: var(--surface-inset);
+  --color-cta: var(--cta);
+  --color-cta-foreground: var(--cta-foreground);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--background);
+  color-scheme: light;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-fk-grotesk), system-ui, sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.page-shell {
+  position: relative;
+  overflow: hidden;
+}
+
+.page-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: transparent;
+  opacity: 0;
+}
+
+.section-card {
+  background: var(--panel);
+  color: var(--foreground);
+  box-shadow: 0 40px 120px var(--shadow);
+}
+
+.glass-panel {
+  background: color-mix(in srgb, var(--background) 74%, white);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 60px var(--shadow);
+  backdrop-filter: blur(12px);
+}

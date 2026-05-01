@@ -1,0 +1,63 @@
+       Config          │                    Value                     │
+  ├─────────────────────────┼──────────────────────────────────────────────┤                                                                                                                                                                                                 
+  │ RPC                     │ https://solana-rpc.publicnode.com            │
+  ├─────────────────────────┼──────────────────────────────────────────────┤                                                                                                                                                                                                 
+  │ Bridge Program ID       │ 5JCGZsiucAUkAK2sh1bbiz1EsorWs1cBdUat7yjQRNW8 │
+  ├─────────────────────────┼──────────────────────────────────────────────┤                                                                                                                                                                                                 
+  │ BWICK Mint (Token-2022) │ 6urDAWfh1MpZzy1MCPxKmRsECagAiAuuPAXqb6Hcpump │
+  ├─────────────────────────┼──────────────────────────────────────────────┤                                                                                                                                                                                                 
+  │ Network                 │ mainnet-beta                                 │
+  └─────────────────────────┴──────────────────────────────────────────────┘                                                                                                                                                                                                 
+                                                            
+  BWICK Chain (Cosmos)                                                                                                                                                                                                                                                       
+  
+  ┌──────────────────┬─────────────────────────────┐                                                                                                                                                                                                                         
+  │      Config      │            Value            │        
+  ├──────────────────┼─────────────────────────────┤
+  │ RPC (Tendermint) │ http://174.138.87.223:26657 │
+  ├──────────────────┼─────────────────────────────┤
+  │ REST (LCD)       │ http://174.138.87.223:1317  │                                                                                                                                                                                                                         
+  ├──────────────────┼─────────────────────────────┤
+  │ Chain ID         │ bwick-1                     │                                                                                                                                                                                                                         
+  ├──────────────────┼─────────────────────────────┤                                                                                                                                                                                                                         
+  │ Denom            │ ubwick                      │
+  ├──────────────────┼─────────────────────────────┤                                                                                                                                                                                                                         
+  │ Bech32 Prefix    │ bwick                       │        
+  ├──────────────────┼─────────────────────────────┤                                                                                                                                                                                                                         
+  │ Decimals         │ 6                           │
+  └──────────────────┴─────────────────────────────┘                                                                                                                                                                                                                         
+                                                            
+  Relayer / Backend
+
+  ┌──────────────┬──────────────────────────────┐
+  │    Config    │            Value             │
+  ├──────────────┼──────────────────────────────┤
+  │ Relayer API  │ http://174.138.87.223:3080   │
+  ├──────────────┼──────────────────────────────┤
+  │ Relayer Info │ GET /api/bridge/relayer-info │                                                                                                                                                                                                                            
+  ├──────────────┼──────────────────────────────┤                                                                                                                                                                                                                            
+  │ Submit TX    │ POST /api/bridge/submit-tx   │                                                                                                                                                                                                                            
+  └──────────────┴──────────────────────────────┘                                                                                                                                                                                                                            
+                                                            
+  Env Vars (Next.js)
+
+  NEXT_PUBLIC_SOLANA_RPC_URL=https://solana-rpc.publicnode.com                                                                                                                                                                                                               
+  NEXT_PUBLIC_BRIDGE_PROGRAM_ID=5JCGZsiucAUkAK2sh1bbiz1EsorWs1cBdUat7yjQRNW8
+  NEXT_PUBLIC_BWICK_MINT_ADDRESS=6urDAWfh1MpZzy1MCPxKmRsECagAiAuuPAXqb6Hcpump                                                                                                                                                                                                
+  NEXT_PUBLIC_RELAYER_URL=http://174.138.87.223:3080                                                                                                                                                                                                                         
+  NEXT_PUBLIC_RPC_ENDPOINT=http://174.138.87.223:26657                                                                                                                                                                                                                       
+  NEXT_PUBLIC_REST_ENDPOINT=http://174.138.87.223:1317                                                                                                                                                                                                                       
+  NEXT_PUBLIC_CHAIN_ID=bwick-1                              
+  NEXT_PUBLIC_SOLANA_NETWORK=mainnet-beta                                                                                                                                                                                                                                    
+                                                            
+  PDAs (derived from program)                                                                                                                                                                                                                                                
+                                                            
+  ┌──────────────┬─────────────────────────────────┐                                                                                                                                                                                                                         
+  │     PDA      │              Seeds              │        
+  ├──────────────┼─────────────────────────────────┤
+  │ Bridge Pool  │ ["bridge_pool"]                 │
+  ├──────────────┼─────────────────────────────────┤
+  │ Pool Vault   │ ["pool_vault"]                  │                                                                                                                                                                                                                         
+  ├──────────────┼─────────────────────────────────┤
+  │ User Account │ ["user_account", <user_pubkey>] │                                                                                                                                                                                                                         
+  └──────────────┴─────────────────────────────────┘                            

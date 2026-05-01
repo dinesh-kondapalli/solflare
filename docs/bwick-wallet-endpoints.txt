@@ -1,0 +1,87 @@
+BWICK Wallet Endpoint Requirements
+
+For the BWICK wallet to work properly, we need the following from the client.
+
+Must Have
+
+1. RPC endpoint
+- Purpose: send signed BWICK transactions to the chain
+- Needed for: sending tokens
+- Example format:
+  https://<rpc-host>:26657
+
+2. LCD / REST endpoint
+- Purpose: read wallet and chain data
+- Needed for:
+  - checking whether an account exists
+  - getting account number and sequence for signing
+  - reading wallet balances
+  - checking basic chain/node info
+- Example format:
+  https://<lcd-host>:1317
+
+3. Relayer API endpoint
+- Purpose: future bridge and service health support
+- Needed right now for:
+  - health check only
+- Example format:
+  https://<relayer-host>:3080
+
+Specific API Routes Needed Right Now
+
+1. GET /cosmos/auth/v1beta1/accounts/:address
+- Used to get:
+  - account existence
+  - account number
+  - sequence
+
+2. GET /cosmos/bank/v1beta1/balances/:address
+- Used to get:
+  - BWICK balance
+
+3. GET /cosmos/base/tendermint/v1beta1/node_info
+- Used to confirm node/chain info
+
+4. RPC transaction broadcast support
+- Must support standard Cosmos transaction broadcasting
+- Used to send signed BWICK transactions
+
+5. GET /health on relayer
+- Used to confirm relayer service is up
+
+Strongly Recommended
+
+1. Transaction history endpoints
+- Needed to show sent and received transactions
+- Helpful routes usually include:
+  - GET /cosmos/tx/v1beta1/txs?events=...
+  - GET /cosmos/tx/v1beta1/txs/:hash
+
+2. Transaction simulation / gas estimation
+- Needed to estimate fees correctly before sending
+- Helpful route usually includes:
+  - POST /cosmos/tx/v1beta1/simulate
+
+3. Fee / chain parameter endpoints
+- Needed if fees should be dynamic instead of hardcoded
+
+4. Spendable balance support
+- Needed if some balances can be locked, staked, or vesting
+
+5. Full relayer documentation
+- Needed if the wallet will later support bridge actions
+- We would need:
+  - bridge quote route
+  - bridge transfer route
+  - bridge status route
+  - refund/failure handling route
+
+Current Minimum Needed to Operate
+
+- RPC
+- LCD
+- /accounts route
+- /balances route
+- /node_info route
+- tx broadcast support
+- relayer /health
